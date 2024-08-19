@@ -34,5 +34,10 @@ public class SondhaniController {
         return sandhaniService.updateBloodBank(sandhaniId, bloodGroup, updatedQuantity);
     }
 
+    @PutMapping("/updateProfile")
+    public Sandhani updateProfile(@RequestBody Sandhani sandhani){
+        return sandhaniService.updateProfile(sandhani);
+    }
+
 
 }

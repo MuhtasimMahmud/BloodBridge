@@ -71,4 +71,16 @@ public class SandhaniService {
         }
         return bloodRepository.findAllBySandhaniId(sandhaniId);
     }
+
+    public Sandhani updateProfile(Sandhani sandhani) {
+        Sandhani sandhani1 = sandhaniRepository.findById(sandhani.getId());
+        if (sandhani1 != null){
+            try {
+                sandhaniRepository.save(sandhani);
+            }catch (Exception exception){
+                exception.printStackTrace();
+            }
+        }
+        return sandhani;
+    }
 }
