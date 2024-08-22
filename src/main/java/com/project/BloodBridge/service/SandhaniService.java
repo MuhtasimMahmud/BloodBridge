@@ -22,7 +22,6 @@ public class SandhaniService {
         Sandhani s = sandhaniRepository.findById(sandhani.getId());
         if(s == null){
             try {
-                System.out.println("Try block");
                 return sandhaniRepository.save(sandhani);
             }catch (Exception exception){
                 exception.printStackTrace();

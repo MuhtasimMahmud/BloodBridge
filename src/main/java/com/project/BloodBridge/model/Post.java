@@ -15,7 +15,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "post")
 public class Post {
 
     @Id
@@ -31,6 +30,6 @@ public class Post {
 
     @ManyToOne
     @JsonBackReference
-    User user = new User();
+    private User user;
 
 }

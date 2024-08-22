@@ -21,11 +21,12 @@ public class User {
 
     @Id
     private String phoneNumber;
+    private String name;
     private String email;
     private String bloodGroup;
     private LocalDate lastDonationDate;
     private String upazillaOrThana;
-    private String disctrict;
+    private String district;
     private String division;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
