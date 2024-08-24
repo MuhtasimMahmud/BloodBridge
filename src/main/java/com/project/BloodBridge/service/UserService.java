@@ -44,12 +44,12 @@ public class UserService {
     }
 
 
-    public List<Post> createBloodPost(Post post, String id) {
-        User user = userRepository.findByPhoneNumber(id);
+    public List<Post> createBloodPost(Post post, String postGivingUserId) {
+        User user = userRepository.findByPhoneNumber(postGivingUserId);
         if(user != null){
             try{
                 user.getPosts().add(post);
-                postRepository.save(post);
+                post.setUser(user);
                 userRepository.save(user);
                 return postRepository.findAll();
             }catch (Exception exception){
@@ -57,5 +57,22 @@ public class UserService {
             }
         }
         return null;
+    }
+
+    public List<Post> showAllPost() {
+        return postRepository.findAll();
+    }
+
+
+    public User showUserProfile(String id) {
+        return userRepository.findByPhoneNumber(id);
+    }
+
+    public Post showSpecificPost(int bloodPostId) {
+        return postRepository.findByPostId(bloodPostId);
+    }
+
+    public Post editPost(String userID, int postId) {
+        User user = userRepository.findById(userID);
     }
 }

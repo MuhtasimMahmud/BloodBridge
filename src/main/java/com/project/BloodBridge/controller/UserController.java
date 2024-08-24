@@ -20,16 +20,37 @@ public class UserController {
         return userService.createUserAccount(user);
     }
 
+    @GetMapping("/myProfile/{id}")
+    private User userProfile(@PathVariable String id){
+        return userService.showUserProfile(id);
+    }
 
     @PutMapping("/updateUserAccount")
     private User updateUserAccount(@RequestBody User user){
         return userService.updateAccount(user);
     }
 
-    @PostMapping("/bloodPost/{id}")
-    private List<Post> bloodPost(@RequestBody Post post, @PathVariable String id){
-        return userService.createBloodPost(post, id);
+    @GetMapping("/allPost")
+    private List<Post> showAllPosts(){
+        return userService.showAllPost();
     }
+
+    @PostMapping("/bloodPost/{postGivingUserId}")
+    private List<Post> bloodPosts(@RequestBody Post post, @PathVariable String postGivingUserId){
+        return userService.createBloodPost(post, postGivingUserId);
+    }
+
+    @GetMapping("/bloodPost/{bloodPostId}")
+    private Post bloodPost(@PathVariable int bloodPostId){
+        return userService.showSpecificPost(bloodPostId);
+    }
+
+    @PutMapping("/editPost/{userID}/{postId}")
+    private Post editPost(@PathVariable String userID, @PathVariable int postId){
+        return userService.editPost(userID, postId);
+    }
+
+
 
 
 }
