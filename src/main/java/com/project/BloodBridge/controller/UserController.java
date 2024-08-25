@@ -46,8 +46,13 @@ public class UserController {
     }
 
     @PutMapping("/editPost/{userID}/{postId}")
-    private Post editPost(@PathVariable String userID, @PathVariable int postId){
-        return userService.editPost(userID, postId);
+    private Post editPost(@PathVariable String userID, @PathVariable int postId, @RequestBody Post post){
+        return userService.editPost(userID, postId, post);
+    }
+
+    @GetMapping("/myPosts/{userId}")
+    private List<Post> myPosts(@PathVariable String userId){
+        return userService.showMyAllPosts(userId);
     }
 
 
