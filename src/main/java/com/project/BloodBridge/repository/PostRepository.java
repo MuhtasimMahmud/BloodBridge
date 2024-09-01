@@ -28,6 +28,4 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
             @Param("district") String district,
             @Param("division") String division
     );
-
-
 }

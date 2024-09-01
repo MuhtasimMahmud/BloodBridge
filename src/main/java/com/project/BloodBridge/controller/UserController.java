@@ -54,8 +54,4 @@ public class UserController {
     private List<Post> myPosts(@PathVariable String userId){
         return userService.showMyAllPosts(userId);
     }
-
-
-
-
 }
