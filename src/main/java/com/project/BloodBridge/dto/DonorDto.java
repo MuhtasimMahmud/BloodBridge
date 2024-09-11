@@ -1,4 +1,4 @@
-package com.project.BloodBridge.model;
+package com.project.BloodBridge.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Donor {
+public class DonorDto {
     private String bloodGroup;
     private LocalDate needDate;
     private String upazillaOrThana;

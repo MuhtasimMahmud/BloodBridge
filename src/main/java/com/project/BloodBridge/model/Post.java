@@ -1,7 +1,6 @@
 package com.project.BloodBridge.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,6 +29,6 @@ public class Post {
 
     @ManyToOne
     @JsonBackReference
-    private User user;
+    private DonorOrSeeker donorOrSeeker;
 
 }

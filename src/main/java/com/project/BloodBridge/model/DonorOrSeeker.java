@@ -16,8 +16,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "user")
-public class User {
+@Table(name = "donorOrSeeker")
+public class DonorOrSeeker {
 
     @Id
     private String phoneNumber;
@@ -29,7 +29,7 @@ public class User {
     private String district;
     private String division;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "donorOrSeeker")
     @JsonManagedReference
     List<Post> posts = new ArrayList<>();
 

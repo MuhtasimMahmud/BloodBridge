@@ -1,29 +1,28 @@
 package com.project.BloodBridge.service;
 
+import com.project.BloodBridge.model.DonorOrSeeker;
 import com.project.BloodBridge.model.Post;
-import com.project.BloodBridge.model.User;
 import com.project.BloodBridge.repository.PostRepository;
-import com.project.BloodBridge.repository.UserRepository;
-import org.springframework.beans.BeanUtils;
+import com.project.BloodBridge.repository.DonorOrSeekerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserService {
+public class DonorOrSeekerService {
 
     @Autowired
-    private UserRepository userRepository;
+    private DonorOrSeekerRepository donorOrSeekerRepository;
 
     @Autowired
     private PostRepository postRepository;
 
-    public User createUserAccount(User user) {
-        User u = userRepository.findByPhoneNumber(user.getPhoneNumber());
+    public DonorOrSeeker createUserAccount(DonorOrSeeker donorOrSeeker) {
+        DonorOrSeeker u = donorOrSeekerRepository.findByPhoneNumber(donorOrSeeker.getPhoneNumber());
         if(u == null){
             try {
-                return userRepository.save(user);
+                return donorOrSeekerRepository.save(donorOrSeeker);
             }catch (Exception exception){
                 exception.printStackTrace();
             }
@@ -32,11 +31,11 @@ public class UserService {
     }
 
 
-    public User updateAccount(User updatedUser) {
-        User u = userRepository.findByPhoneNumber(updatedUser.getPhoneNumber());
+    public DonorOrSeeker updateAccount(DonorOrSeeker updatedDonorOrSeeker) {
+        DonorOrSeeker u = donorOrSeekerRepository.findByPhoneNumber(updatedDonorOrSeeker.getPhoneNumber());
         if(u != null){
             try {
-                return userRepository.save(updatedUser);
+                return donorOrSeekerRepository.save(updatedDonorOrSeeker);
             }catch (Exception exception){
                 exception.printStackTrace();
             }
@@ -46,12 +45,12 @@ public class UserService {
 
 
     public List<Post> createBloodPost(Post post, String postGivingUserId) {
-        User user = userRepository.findByPhoneNumber(postGivingUserId);
-        if(user != null){
+        DonorOrSeeker donorOrSeeker = donorOrSeekerRepository.findByPhoneNumber(postGivingUserId);
+        if(donorOrSeeker != null){
             try{
-                user.getPosts().add(post);
-                post.setUser(user);
-                userRepository.save(user);
+                donorOrSeeker.getPosts().add(post);
+                post.setDonorOrSeeker(donorOrSeeker);
+                donorOrSeekerRepository.save(donorOrSeeker);
                 return postRepository.findAll();
             }catch (Exception exception){
                 exception.printStackTrace();
@@ -64,8 +63,8 @@ public class UserService {
         return postRepository.findAll();
     }
 
-    public User showUserProfile(String id) {
-        return userRepository.findByPhoneNumber(id);
+    public DonorOrSeeker showUserProfile(String id) {
+        return donorOrSeekerRepository.findByPhoneNumber(id);
     }
 
     public Post showSpecificPost(int bloodPostId) {
@@ -73,18 +72,18 @@ public class UserService {
     }
 
     public Post editPost(String userID, int postId, Post post) {
-        User user = userRepository.findByPhoneNumber(userID);
-        List<Post> currentUserPosts = user.getPosts();
+        DonorOrSeeker donorOrSeeker = donorOrSeekerRepository.findByPhoneNumber(userID);
+        List<Post> currentUserPosts = donorOrSeeker.getPosts();
 
         for(Post p : currentUserPosts){
             if(p.getPostId() == postId){
                 updateExistingPost(p, post);
-                user.setPosts(currentUserPosts);
+                donorOrSeeker.setPosts(currentUserPosts);
                 break;
             }
         }
         try {
-            userRepository.save(user);
+            donorOrSeekerRepository.save(donorOrSeeker);
         }catch (Exception exception){
             exception.printStackTrace();
         }
@@ -102,6 +101,6 @@ public class UserService {
     }
 
     public List<Post> showMyAllPosts(String userId) {
-        return userRepository.findByPhoneNumber(userId).getPosts();
+        return donorOrSeekerRepository.findByPhoneNumber(userId).getPosts();
     }
 }

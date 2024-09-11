@@ -1,7 +1,7 @@
 package com.project.BloodBridge.controller;
 
-import com.project.BloodBridge.model.Donor;
-import com.project.BloodBridge.model.User;
+import com.project.BloodBridge.dto.DonorDto;
+import com.project.BloodBridge.model.DonorOrSeeker;
 import com.project.BloodBridge.service.DonorSearchFilterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +17,8 @@ public class DonorSearchFilterController {
     private DonorSearchFilterService donorSearchFilterService;
 
     @GetMapping("/findDonorWithFilter")
-    public List<User> findDonor(@RequestBody Donor donor){
-        return donorSearchFilterService.findDonorWithFilter(donor);
+    public List<DonorOrSeeker> findDonor(@RequestBody DonorDto donorDto){
+        return donorSearchFilterService.findDonorWithFilter(donorDto);
     }
 
 }
